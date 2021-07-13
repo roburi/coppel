@@ -1,14 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Config;
 
-/**
- *
- * @author Usuario
- */
+import java.sql.Connection;
+import java.sql.*;
+
 public class Conexion {
+    Connection connec;
+    public Conexion(){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            connec = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/examendb","root","123456");
+        }catch(ClassNotFoundException | SQLException e){
+            System.err.println("Error "+e);
+        }
+    }
     
+    public Connection getConexion(){
+        return connec;
+    }
 }
