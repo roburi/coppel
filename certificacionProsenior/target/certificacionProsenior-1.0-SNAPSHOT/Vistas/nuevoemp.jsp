@@ -1,8 +1,4 @@
-<%-- 
-    Document   : nuevoemp
-    Created on : Jul 13, 2021, 10:37:50 AM
-    Author     : Usuario
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
