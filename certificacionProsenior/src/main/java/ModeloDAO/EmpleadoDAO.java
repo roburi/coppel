@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class EmpleadoDAO implements CRUD{
     
@@ -53,7 +52,19 @@ public class EmpleadoDAO implements CRUD{
 
     @Override
     public boolean nuevo(Empleado emp) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+       String sql ="INSERT INTO empleados(nom_empleado, rol_id, num_empleado, tipo_id) values('"+emp.getNom_empleado()+"','"+emp.getRol_id()+"','"+emp.getNum_empleado()+"','"+emp.getTipo_id()+"')";
+       
+        try {
+            
+            con = cn.getConexion();
+            ps =  con.prepareStatement(sql);
+            ps.execute();
+            
+        } catch (Exception e) {
+            
+        }
+       
+        return false;
     }
 
     @Override

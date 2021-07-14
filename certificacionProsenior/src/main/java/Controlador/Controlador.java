@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
+import Modelo.Empleado;
+import ModeloDAO.EmpleadoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,14 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Usuario
- */
 public class Controlador extends HttpServlet {
     
-    String listar = "Vistas/listaemp.jsp", add = "Vistas/nuevoemp.jsp", editar = "Vistas/editaremp.jsp";
-
+    String listar = "Vistas/listaemp.jsp";
+    String add = "Vistas/nuevoemp.jsp";
+    String editar = "Vistas/editaremp.jsp";
+    Empleado e = new Empleado();
+    EmpleadoDAO edao = new EmpleadoDAO();
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -62,6 +60,20 @@ public class Controlador extends HttpServlet {
         String action = request.getParameter("accion");
         
         if(action.equalsIgnoreCase("listar")){
+            acceso = listar;
+        }else if(action.equalsIgnoreCase("add")){
+            acceso = add;
+        }else if(action.equalsIgnoreCase("Agregar")){
+            String nom_empleado = request.getParameter("nom_empleado"); 
+            int rol_id = Integer.parseInt(request.getParameter("rol_id")) ;
+            int num_empleado = Integer.parseInt(request.getParameter("num_empleado"));
+            int tipo_id = Integer.parseInt(request.getParameter("tipo_id"));
+            e.setNom_empleado(nom_empleado);
+            e.setRol_id(rol_id);
+            e.setNum_empleado(num_empleado);
+            e.setTipo_id(tipo_id);
+            
+            edao.nuevo(e);
             acceso = listar;
         }
         
