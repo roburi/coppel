@@ -47,7 +47,27 @@ public class EmpleadoDAO implements CRUD{
 
     @Override
     public Empleado list(int num_empleado) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        String sql = "select * from empleados where num_empleado ="+num_empleado;
+        
+        try {
+            con = cn.getConexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Empleado emp = new Empleado();
+                e.setNum_empleado(rs.getInt("num_empleado"));
+                e.setRol_id(rs.getInt("rol_id"));
+                e.setTipo_id(rs.getInt("tipo_id"));
+                e.setNom_empleado(rs.getString("nom_empleado"));
+                
+            }
+            
+        } catch (Exception e) {
+            
+        }
+        
+        return e;
     }
 
     @Override
@@ -69,7 +89,17 @@ public class EmpleadoDAO implements CRUD{
 
     @Override
     public boolean editar(Empleado emp) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+         String sql ="UPDATE empleados SET nom_empleado ="+emp.getNom_empleado()+" , rol_id ="+emp.getRol_id()+" , tipo_id = "+emp.getTipo_id()+" WHERE num_empleado ="+emp.getNum_empleado();
+         
+         try {
+            con = cn.getConexion();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+        }
+         
+         return false;
     }
 
     @Override

@@ -7,7 +7,7 @@
     <body>
         <div>
             <h1>Agregar Persona</h1>
-            <a href="Controlador?accion=add"></a>
+            <a href="Controlador?accion=add">Nuevo empleado</a>
             <form action="Controlador">
                 Num. Empleado:<br>
                 <input type="number" name="num_empleado"><br>

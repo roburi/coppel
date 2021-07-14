@@ -5,6 +5,7 @@ import Modelo.Empleado;
 import ModeloDAO.EmpleadoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +37,7 @@ public class Controlador extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controlador</title>");            
+            out.println("<title>Servlet Controlador Error</title>");            
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Controlador at " + request.getContextPath() + "</h1>");
@@ -60,21 +61,32 @@ public class Controlador extends HttpServlet {
         String action = request.getParameter("accion");
         
         if(action.equalsIgnoreCase("listar")){
-            acceso = listar;
+                acceso = listar;
         }else if(action.equalsIgnoreCase("add")){
-            acceso = add;
+                acceso = add;
         }else if(action.equalsIgnoreCase("Agregar")){
-            String nom_empleado = request.getParameter("nom_empleado"); 
-            int rol_id = Integer.parseInt(request.getParameter("rol_id")) ;
-            int num_empleado = Integer.parseInt(request.getParameter("num_empleado"));
-            int tipo_id = Integer.parseInt(request.getParameter("tipo_id"));
-            e.setNom_empleado(nom_empleado);
-            e.setRol_id(rol_id);
-            e.setNum_empleado(num_empleado);
-            e.setTipo_id(tipo_id);
-            
-            edao.nuevo(e);
-            acceso = listar;
+                String nom_empleado = request.getParameter("nom_empleado"); 
+                int rol_id = Integer.parseInt(request.getParameter("rol_id")) ;
+                int num_empleado = Integer.parseInt(request.getParameter("num_empleado"));
+                int tipo_id = Integer.parseInt(request.getParameter("tipo_id"));
+                e.setNom_empleado(nom_empleado);
+                e.setRol_id(rol_id);
+                e.setNum_empleado(num_empleado);
+                e.setTipo_id(tipo_id);
+
+                edao.nuevo(e);
+                acceso = listar;
+        }else if (action.equalsIgnoreCase("editar")){
+                request.setAttribute("num_empleado", request.getParameter("num_empleado"));
+                acceso = editar;
+        }else if(action.equalsIgnoreCase("Actualizar")){
+                e.setNum_empleado(Integer.parseInt(request.getParameter("num_empleado")));
+                e.setNom_empleado(request.getParameter("nom_emplpeado"));
+                e.setRol_id(Integer.parseInt(request.getParameter("rol_id")));
+                e.setTipo_id(Integer.parseInt(request.getParameter("tipo_id")));
+                
+                edao.editar(e);
+                acceso = listar;
         }
         
         RequestDispatcher vista = request.getRequestDispatcher(acceso);

@@ -39,7 +39,7 @@
                         <td><%= em.getRol_id() %></td>
                         <td><%= em.getTipo_id() %></td>
                         <td>
-                            <a>Editar</a>
+                            <a href="Controlador?accion=editar&num_empleado=<%= em.getNum_empleado() %>">Editar</a>
                             <a>Eliminar</a>
                         </td>
                     </tr>
